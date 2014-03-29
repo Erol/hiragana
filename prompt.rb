@@ -99,9 +99,8 @@ width = segments.reduce(width - 3) do |n, segment|
   n -= s > 0 ? s + 3 : 1
 end
 
-fill = (width / 2).times.map { [katakana.sample].pack 'U' }.reduce(:+)
+fill = '%B' + (width / 2).times.map { [katakana.sample].pack 'U' }.reduce(:+)
 fill = fill + ' ' if width % 2 == 1
-fill = '%B' + fill
 
 segments.insert float, [fill, :black, :black]
 

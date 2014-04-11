@@ -68,7 +68,7 @@ if paths.size > 4
 end
 
 paths.each do |path|
-  segments << [path, :white, :green]
+  segments << [path, :black, :green]
 end
 
 segments << ['', :black, :black] unless segments.last.first.empty?

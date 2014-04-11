@@ -52,7 +52,7 @@ if home.match directory
   directory.gsub! home, ''
   directory.gsub! /^\//, ''
 
-  segments << ['~', :white, :yellow]
+  segments << ['~', :black, :yellow]
 else
   directory.gsub! /^\//, ''
 

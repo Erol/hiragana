@@ -73,6 +73,12 @@ end
 
 segments << ['', :black, :black] unless segments.last.first.empty?
 
+branch = `git rev-parse --abbrev-ref HEAD`.gsub "\n", ''
+
+unless branch.empty?
+  segments << [branch, :black, :yellow]
+end
+
 float = segments.size
 
 ENV['GS_NAME'].tap do |gemset|

@@ -56,7 +56,7 @@ if home.match directory
 else
   directory.gsub! /^\//, ''
 
-  segments << ['/', :black, :yellow]
+  segments << ['/', :white, :yellow]
 end
 
 segments << ['', :black, :black]

@@ -46,6 +46,11 @@ end
 
 segments = []
 
+segments << [`hostname`.gsub("\n", ''), :yellow, :black, :left]
+segments << [ENV['USER'], :black, :yellow, :left]
+
+segments << ['', :black, :black]
+
 home = Regexp.new "^#{ENV['HOME']}"
 
 if home.match directory
@@ -68,7 +73,7 @@ if paths.size > 4
 end
 
 paths.each do |path|
-  segments << [path, :black, :green]
+  segments << [path, :white, :yellow]
 end
 
 segments << ['', :black, :black] unless segments.last.first.empty?
@@ -76,27 +81,24 @@ segments << ['', :black, :black] unless segments.last.first.empty?
 branch = `git rev-parse --abbrev-ref HEAD`.gsub "\n", ''
 
 unless branch.empty?
-  segments << [branch, :black, :yellow]
+  segments << [branch, :black, :green]
 end
 
-float = segments.size
+segments << ['', :black, :black] unless segments.last.first.empty?
 
 ENV['GS_NAME'].tap do |gemset|
   if gemset
-    segments << [gemset, :black, :blue, :right]
+    segments << [gemset, :black, :blue, :left]
   end
 end
 
 ENV['RUBY_VERSION'].tap do |version|
   if version
-    segments << [version, :black, :blue, :right]
+    segments << [version, :black, :blue, :left]
   end
 end
 
-segments << ['', :black, :black, :right] unless segments.last.first.empty?
-
-segments << [ENV['USER'], :black, :yellow, :right]
-segments << [`hostname`.gsub("\n", ''), :yellow, :black, :right]
+segments << ['', :black, :black, :left] unless segments.last.first.empty?
 
 katakana = (0x3041..0x3096).to_a + (0x3099..0x309f).to_a
 
@@ -104,10 +106,5 @@ width = segments.reduce(width - 3) do |n, segment|
   s = String(segment.first).size
   n -= s > 0 ? s + 3 : 1
 end
-
-fill = '%B' + (width / 2).times.map { [katakana.sample].pack 'U' }.reduce(:+)
-fill = fill + ' ' if width % 2 == 1
-
-segments.insert float, [fill, :black, :black]
 
 print powerline(*segments)

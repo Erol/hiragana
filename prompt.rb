@@ -92,6 +92,12 @@ ENV['GS_NAME'].tap do |gemset|
   end
 end
 
+ENV['RUBY_ENGINE'].tap do |engine|
+  if engine
+    segments << [engine, :black, :blue, :left]
+  end
+end
+
 ENV['RUBY_VERSION'].tap do |version|
   if version
     segments << [version, :black, :blue, :left]

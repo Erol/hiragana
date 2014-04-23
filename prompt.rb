@@ -88,19 +88,19 @@ segments << ['', :black, :black] unless segments.last.first.empty?
 
 ENV['GS_NAME'].tap do |gemset|
   if gemset
-    segments << [gemset, :black, :blue, :left]
+    segments << [gemset, :black, :red, :left]
   end
 end
 
 ENV['RUBY_ENGINE'].tap do |engine|
   if engine
-    segments << [engine, :black, :blue, :left]
+    segments << [engine, :black, :red, :left]
   end
 end
 
 ENV['RUBY_VERSION'].tap do |version|
   if version
-    segments << [version, :black, :blue, :left]
+    segments << [version, :black, :red, :left]
   end
 end
 
